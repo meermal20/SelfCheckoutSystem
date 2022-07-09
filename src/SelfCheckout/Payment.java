@@ -157,7 +157,7 @@ public class Payment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
-        //PAYMENT PROCESS AND DISPLAY RECEIPT
+        //payment process and then display the receipt
         double amountpay = 0;
         try {
             amountpay = Double.parseDouble(amountpayfield.getText());

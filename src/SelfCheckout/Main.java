@@ -31,7 +31,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("cashierapp.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("customerData.txt"));
             String line = br.readLine();
 
             String customerID;

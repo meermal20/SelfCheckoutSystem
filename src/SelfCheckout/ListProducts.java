@@ -24,19 +24,24 @@ public class ListProducts extends javax.swing.JFrame {
         //SORT ITEMS TO ADD TO A NEW LIST
         List<CustInformation> convertedItemList = null;
         List<CustInformation> filteredItemListCust = null;
-        if (counterNumber == 1) {
-            convertedItemList = (List<CustInformation>) SelfCheckout.Main.getCounter1().stream().collect(Collectors.toList());
-            filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
-        } else if (counterNumber == 2) {
-            convertedItemList = (List<CustInformation>) SelfCheckout.Main.getCounter2().stream().collect(Collectors.toList());
-            filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
-        } else if (counterNumber == 3) {
-            convertedItemList = (List<CustInformation>) SelfCheckout.Main.getCounter3().stream().collect(Collectors.toList());
-            filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+        switch (counterNumber) {
+            case 1 -> {
+                convertedItemList = (List<CustInformation>) SelfCheckout.Main.getCounter1().stream().collect(Collectors.toList());
+                filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+            }
+            case 2 -> {
+                convertedItemList = (List<CustInformation>) SelfCheckout.Main.getCounter2().stream().collect(Collectors.toList());
+                filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+            }
+            case 3 -> {
+                convertedItemList = (List<CustInformation>) SelfCheckout.Main.getCounter3().stream().collect(Collectors.toList());
+                filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+            }
+            default -> {
+            }
         }
 
-        for (Iterator iterator = filteredItemListCust.iterator(); iterator.hasNext();) {
-            CustInformation nextItemData = (CustInformation) iterator.next();
+        for (CustInformation nextItemData : filteredItemListCust) {
             //ALSO CALCULATE TOTAL PAYMENT HERE
             totalPayment = totalPayment + nextItemData.getitemPrice();
             itemTableModel.addRow(new Object[]{nextItemData.getItemName(), nextItemData.getItemID(), "RM " + nextItemData.getitemPrice(), nextItemData.getDatePurchase()});

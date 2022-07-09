@@ -162,7 +162,7 @@ public class ListCustCounter extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         //this is for payment process
         if (payment == null) {
-            //get the first customer in the queue
+            //get the first customer from the queue
             CustInformation datacust = null;
             switch (counterNumber) {
                 case 1:
@@ -187,20 +187,20 @@ public class ListCustCounter extends javax.swing.JFrame {
             List<CustInformation> convertedItemList = null;
             List<CustInformation> filteredItemListCust = null;
             switch (counterNumber) {
-                case 1:
+                case 1 -> {
                     convertedItemList = (List<CustInformation>) SelfCheckout.Main.getCounter1().stream().collect(Collectors.toList());
                     filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custIDPay)).collect(Collectors.toList());
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     convertedItemList = (List<CustInformation>) SelfCheckout.Main.getCounter2().stream().collect(Collectors.toList());
                     filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custIDPay)).collect(Collectors.toList());
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     convertedItemList = (List<CustInformation>) SelfCheckout.Main.getCounter3().stream().collect(Collectors.toList());
                     filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custIDPay)).collect(Collectors.toList());
-                    break;
-                default:
-                    break;
+                }
+                default -> {
+                }
             }
 
             int countitem = 0;
