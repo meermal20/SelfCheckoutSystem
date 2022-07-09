@@ -18,7 +18,7 @@ public class CustReceipt extends javax.swing.JFrame {
         paidlabel.setText("Paid: RM " + paidAmount);
         balancelabel.setText("Balance: RM " + balance);
 
-        //display products in receipt
+        //display products in the receipt
         DefaultTableModel receiptTableModel = (DefaultTableModel) itemReceiptTable.getModel();
         for (Iterator iterator = listItem.iterator(); iterator.hasNext();) {
             CustInformation customeritemdata = (CustInformation) iterator.next();

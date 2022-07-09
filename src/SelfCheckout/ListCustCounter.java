@@ -17,17 +17,11 @@ public class ListCustCounter extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         counterlabel.setText("Counter " + counterNumber);
         switch (counterNumber) {
-            case 1:
-                displayCustomer(SelfCheckout.Main.getCounter1());
-                break;
-            case 2:
-                displayCustomer(SelfCheckout.Main.getCounter2());
-                break;
-            case 3:
-                displayCustomer(SelfCheckout.Main.getCounter3());
-                break;
-            default:
-                break;
+            case 1 -> displayCustomer(SelfCheckout.Main.getCounter1());
+            case 2 -> displayCustomer(SelfCheckout.Main.getCounter2());
+            case 3 -> displayCustomer(SelfCheckout.Main.getCounter3());
+            default -> {
+            }
         }
     }
 

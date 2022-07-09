@@ -161,7 +161,7 @@ public class Payment extends javax.swing.JFrame {
         double amountpay = 0;
         try {
             amountpay = Double.parseDouble(amountpayfield.getText());
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please enter money to proceed", "Invalid", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -174,17 +174,16 @@ public class Payment extends javax.swing.JFrame {
 
         //FIND CUSTOMER'S DATA IN QUEUE
         List<CustInformation> convertedCustList = null;
-        if (counterNumber == 1) {
-            convertedCustList = (List<CustInformation>) SelfCheckout.Main.getCounter1().stream().collect(Collectors.toList());
-        } else if (counterNumber == 2) {
-            convertedCustList = (List<CustInformation>) SelfCheckout.Main.getCounter2().stream().collect(Collectors.toList());
-        } else if (counterNumber == 3) {
-            convertedCustList = (List<CustInformation>) SelfCheckout.Main.getCounter3().stream().collect(Collectors.toList());
+        switch (counterNumber) {
+            case 1 -> convertedCustList = (List<CustInformation>) SelfCheckout.Main.getCounter1().stream().collect(Collectors.toList());
+            case 2 -> convertedCustList = (List<CustInformation>) SelfCheckout.Main.getCounter2().stream().collect(Collectors.toList());
+            case 3 -> convertedCustList = (List<CustInformation>) SelfCheckout.Main.getCounter3().stream().collect(Collectors.toList());
+            default -> {
+            }
         }
         String custIC = "";
         String custName = "";
-        for (Iterator iterator = convertedCustList.iterator(); iterator.hasNext();) {
-            CustInformation nextCustomerData = (CustInformation) iterator.next();
+        for (CustInformation nextCustomerData : convertedCustList) {
             if (nextCustomerData.getCustID().equalsIgnoreCase(custID)) {
                 custIC = nextCustomerData.getCustIC();
                 custName = nextCustomerData.getCustName();
@@ -195,18 +194,24 @@ public class Payment extends javax.swing.JFrame {
         //REMOVE CUSTOMER AND ITEM AFTER PAYMENT MADE AND ALSO SAVE LIST ITEM FOR RECEIPT DISPLAY
         Queue listItem = new LinkedList();
         for (int i = 0; i < countItem; i++) {
-            if (counterNumber == 1) {
-                CustInformation itemCurrent = (CustInformation) SelfCheckout.Main.getCounter1().peek();
-                listItem.add(itemCurrent);
-                SelfCheckout.Main.getCounter1().remove();
-            } else if (counterNumber == 2) {
-                CustInformation itemCurrent = (CustInformation) SelfCheckout.Main.getCounter2().peek();
-                listItem.add(itemCurrent);
-                SelfCheckout.Main.getCounter2().remove();
-            } else if (counterNumber == 3) {
-                CustInformation itemCurrent = (CustInformation) SelfCheckout.Main.getCounter3().peek();
-                listItem.add(itemCurrent);
-                SelfCheckout.Main.getCounter3().remove();
+            switch (counterNumber) {
+                case 1 ->                     {
+                        CustInformation itemCurrent = (CustInformation) SelfCheckout.Main.getCounter1().peek();
+                        listItem.add(itemCurrent);
+                        SelfCheckout.Main.getCounter1().remove();
+                    }
+                case 2 ->                     {
+                        CustInformation itemCurrent = (CustInformation) SelfCheckout.Main.getCounter2().peek();
+                        listItem.add(itemCurrent);
+                        SelfCheckout.Main.getCounter2().remove();
+                    }
+                case 3 ->                     {
+                        CustInformation itemCurrent = (CustInformation) SelfCheckout.Main.getCounter3().peek();
+                        listItem.add(itemCurrent);
+                        SelfCheckout.Main.getCounter3().remove();
+                    }
+                default -> {
+                }
             }
         }
 
