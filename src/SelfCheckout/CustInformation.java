@@ -77,6 +77,7 @@ public class CustInformation {
         this.counterPaid = counterPaid;
     }
     
+    @Override
     public String toString(){
         return "Customer ID: " + custID + "\nCustomer name: " + custName + "\nCustomer IC: " + custIC + "\nCounter Paid: " + counterPaid + "\nItem ID: " + getItemID() + "\nItem name: " + getItemName() + "\nPrice: " + getitemPrice() + "\nDate purchased: " + getDatePurchase() + "\nCustomer item ID: " + itemGetCustID();
     }

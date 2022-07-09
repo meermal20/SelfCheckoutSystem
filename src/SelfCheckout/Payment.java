@@ -191,7 +191,7 @@ public class Payment extends javax.swing.JFrame {
             }
         }
 
-        //REMOVE CUSTOMER AND ITEM AFTER PAYMENT MADE AND ALSO SAVE LIST ITEM FOR RECEIPT DISPLAY
+        //REMOVE CUSTOMER AND ITEM AFTER PAYMENT MADE AND SAVE LIST ITEM FOR RECEIPT DISPLAY
         Queue listItem = new LinkedList();
         for (int i = 0; i < countItem; i++) {
             switch (counterNumber) {

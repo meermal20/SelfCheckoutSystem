@@ -63,6 +63,7 @@ public class ProductsInformation {
         this.custID = custID;
     }
     
+    @Override
     public String toString(){
         return "Item ID: " + itemID + "\nItem name: " + itemName + "\nPrice: " + itemPrice + "\nDate purchased: " + datePurchase + "\nCustomer ID: " + custID;
     }

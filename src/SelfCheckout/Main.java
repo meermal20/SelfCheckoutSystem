@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 public class Main {
     
     //stores all customers' queue
-    private static Queue Counter1 = new LinkedList();
-    private static Queue Counter2 = new LinkedList();
-    private static Queue Counter3 = new LinkedList(); //counter 3 is fore customers with more than 5 items
+    private static final Queue Counter1 = new LinkedList();
+    private static final Queue Counter2 = new LinkedList();
+    private static final Queue Counter3 = new LinkedList(); //counter 3 is fore customers with more than 5 items
     
     //temporary list
-    private static ArrayList<CustInformation> CustomerList = new ArrayList();
-    private static ArrayList<String> listCustID = new ArrayList<String>();
+    private static final ArrayList<CustInformation> CustomerList = new ArrayList();
+    private static final ArrayList<String> listCustID = new ArrayList<>();
     private static CounterSelect CounterSwitching;
     
     public static Queue getCounter1(){
@@ -31,34 +31,34 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            BufferedReader br = new BufferedReader(new FileReader("customerData.txt"));
-            String line = br.readLine();
-
-            String customerID;
-            String customerIC;
-            String customerName;
-            String currentCustID = "";
-
-            while (line != null) {
-                //read all data berfore adding to queue
-                StringTokenizer st = new StringTokenizer(line, ",");
-                customerID = st.nextToken();
-                customerIC = st.nextToken();
-                customerName = st.nextToken();
-                String itemID = st.nextToken();
-                String itemName = st.nextToken();
-                double itemPrice = Double.parseDouble(st.nextToken());
-                String datePurchase = st.nextToken();
-                if (!customerID.equalsIgnoreCase(currentCustID)) {
-                    listCustID.add(customerID);
-                    currentCustID = customerID;
+            try (BufferedReader br = new BufferedReader(new FileReader("customerData.txt"))) {
+                String line = br.readLine();
+                
+                String customerID;
+                String customerIC;
+                String customerName;
+                String currentCustID = "";
+                
+                while (line != null) {
+                    //read all data berfore adding to queue
+                    StringTokenizer st = new StringTokenizer(line, ",");
+                    customerID = st.nextToken();
+                    customerIC = st.nextToken();
+                    customerName = st.nextToken();
+                    String itemID = st.nextToken();
+                    String itemName = st.nextToken();
+                    double itemPrice = Double.parseDouble(st.nextToken());
+                    String datePurchase = st.nextToken();
+                    if (!customerID.equalsIgnoreCase(currentCustID)) {
+                        listCustID.add(customerID);
+                        currentCustID = customerID;
+                    }
+                    
+                    CustomerList.add(new CustInformation(customerID, customerIC, customerName, null, itemID, itemName, itemPrice, datePurchase));
+                    
+                    line = br.readLine();
                 }
-
-                CustomerList.add(new CustInformation(customerID, customerIC, customerName, null, itemID, itemName, itemPrice, datePurchase));
-
-                line = br.readLine();
             }
-            br.close();
 
             //add data to queue
             int counterState = 1;

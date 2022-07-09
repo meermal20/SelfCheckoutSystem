@@ -9,7 +9,7 @@ public class CustReceipt extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
 
-        //display all customer name, id, ic, payment and balance data
+        //display all customer name, id, ic, payment and balance datas
         custNamelabel.setText(custName);
         custIDlabel.setText(custID);
         custIClabel.setText(custIC);
